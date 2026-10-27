@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>但幾列 Wait A Sec | 溫暖童趣設計工作室</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FFF9F2',
+                        'warm-yellow': '#FFE27C',
+                        'soft-orange': '#FF9F68',
+                        'blush-pink': '#FFD0C7',
+                        'mint-green': '#A8E6CF',
+                        'sky-blue': '#A3E4D7',
+                        'charcoal': '#4A3E3D',
+                        'clay': '#8C6D68'
+                    },
+                    fontFamily: {
+                        sans: ['"Zen Maru Gothic"', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif']
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
+                        '5xl': '2.5rem'
+                    },
+                    boxShadow: {
+                        'cute': '4px 4px 0px 0px #4A3E3D',
+                        'cute-lg': '6px 6px 0px 0px #4A3E3D',
+                        'cute-hover': '2px 2px 0px 0px #4A3E3D',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FFF9F2;
+            color: #4A3E3D;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* 塗鴉波浪線與童趣框線 */
+        .cute-border {
+            border: 3px solid #4A3E3D;
+        }
+
+        .blob-1 {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+        .blob-2 {
+            border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        }
+
+        /* 可愛微動畫 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        .animate-wiggle {
+            animation: wiggle 2s ease-in-out infinite;
+        }
+        .animate-bounce-gentle {
+            animation: bounce-gentle 1.5s ease-in-out infinite;
+        }
+
+        /* 自訂滾動條 */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF9F2;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FF9F68;
+            border-radius: 6px;
+            border: 3px solid #FFF9F2;
+        }
+
+        /* 平滑滾動 */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- 頂部導覽列 -->
+    <nav class="fixed top-0 left-0 w-full z-50 px-4 py-3 sm:px-8 sm:py-4 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md cute-border rounded-full px-5 py-3 flex items-center justify-between shadow-cute">
+            <!-- Logo (帶沙漏手繪插畫) -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 bg-warm-yellow rounded-full cute-border flex items-center justify-center p-1.5 group-hover:rotate-12 transition-transform">
+                    <svg viewBox="0 0 100 100" class="w-full h-full fill-none stroke-charcoal stroke-[8]" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M25 20 H75 M25 80 H75 M30 20 L50 48 L70 20 M30 80 L50 52 L70 80" />
+                        <circle cx="50" cy="65" r="4" class="fill-charcoal" />
+                        <circle cx="45" cy="72" r="3" class="fill-charcoal" />
+                        <circle cx="54" cy="73" r="3" class="fill-charcoal" />
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-black text-xl leading-none text-charcoal tracking-wide">但幾列</span>
+                    <span class="text-[10px] font-display text-clay font-bold tracking-wider">WAIT A SEC</span>
+                </div>
+            </a>
+
+            <!-- 選單連結 (Desktop) -->
+            <div class="hidden md:flex items-center gap-6 font-bold text-base">
+                <a href="#about" class="hover:text-soft-orange transition-colors">關於我們</a>
+                <a href="#portfolio" class="hover:text-soft-orange transition-colors">作品案例</a>
+                <a href="#process" class="hover:text-soft-orange transition-colors">合作流程</a>
+                <a href="#services" class="hover:text-soft-orange transition-colors">服務項目</a>
+            </div>
+
+            <!-- 右側按鈕 -->
+            <div class="flex items-center gap-3">
+                <a href="#contact" class="bg-soft-orange text-white px-5 py-2 rounded-full cute-border font-bold text-sm shadow-cute hover:shadow-cute-hover hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center gap-2">
+                    <span>找我聊聊</span>
+                    <!-- 閃爍小星星手繪插畫 -->
+                    <svg class="w-4 h-4 fill-warm-yellow stroke-charcoal stroke-[6]" viewBox="0 0 100 100">
+                        <path d="M50 5 L63 35 L95 38 L70 60 L78 92 L50 75 L22 92 L30 60 L5 38 L37 35 Z" />
+                    </svg>
+                </a>
+                
+                <!-- 手機版選單開關插畫 -->
+                <button id="menu-btn" class="md:hidden p-1 text-charcoal focus:outline-none w-9 h-9 flex items-center justify-center">
+                    <svg class="w-full h-full stroke-charcoal stroke-[8]" stroke-linecap="round" viewBox="0 0 100 100">
+                        <path d="M15 30 H85 M15 50 H85 M15 70 H85" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- 手機版選單 Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden max-w-6xl mx-auto mt-2 bg-white cute-border rounded-3xl p-6 shadow-cute flex flex-col gap-4 font-bold text-center">
+            <a href="#about" class="mobile-link py-2 border-b border-gray-100 hover:text-soft-orange">關於我們</a>
+            <a href="#portfolio" class="mobile-link py-2 border-b border-gray-100 hover:text-soft-orange">作品案例</a>
+            <a href="#process" class="mobile-link py-2 border-b border-gray-100 hover:text-soft-orange">合作流程</a>
+            <a href="#services" class="mobile-link py-2 hover:text-soft-orange">服務項目</a>
+        </div>
+    </nav>
+
+    <!-- Hero 主視覺區塊 -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-28 px-4 relative overflow-hidden">
+        <!-- 背景裝飾元素 -->
+        <div class="absolute top-20 left-10 w-16 h-16 bg-blush-pink rounded-full blob-1 animate-float opacity-70 -z-10"></div>
+        <div class="absolute top-40 right-12 w-24 h-24 bg-mint-green rounded-full blob-2 animate-float opacity-60 -z-10" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-10 left-1/4 w-20 h-20 bg-warm-yellow rounded-full blob-1 animate-float opacity-50 -z-10" style="animation-delay: 2s;"></div>
+
+        <div class="max-w-5xl mx-auto text-center relative">
+            <!-- 標籤 -->
+            <div class="inline-flex items-center gap-2 bg-warm-yellow text-charcoal px-4 py-1.5 rounded-full cute-border font-bold text-xs sm:text-sm shadow-cute mb-6 animate-bounce-gentle">
+                <!-- 揮手手套插畫 -->
+                <svg class="w-5 h-5 fill-white stroke-charcoal stroke-[6]" viewBox="0 0 100 100">
+                    <path d="M30 50 C20 40 20 25 35 20 C42 18 50 25 50 35 C50 20 62 15 72 25 C80 33 75 48 70 55 C80 55 88 65 82 80 C75 95 40 95 25 80 C15 70 20 58 30 50 Z" />
+                </svg>
+                <span>歡迎光臨「但幾列」創意工作室</span>
+            </div>
+
+            <!-- 主標題 -->
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-charcoal leading-tight sm:leading-tight md:leading-tight mb-6">
+                先 <span class="bg-blush-pink px-3 py-1 rounded-2xl cute-border inline-block rotate-[-2deg]">「但幾列」</span> ！<br class="hidden sm:block">
+                把複雜的想法，變成可愛又好懂的設計！
+            </h1>
+
+            <!-- 副標題 -->
+            <p class="text-base sm:text-xl text-clay font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
+                不使用艱深難懂的設計專業術語。我們用最親切的溝通、溫暖童趣的視覺，幫你找到專屬的吸引力與好創意。
+            </p>
+
+            <!-- 行動呼籲按鈕區 -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#portfolio" class="w-full sm:w-auto bg-soft-orange text-white text-lg font-bold px-8 py-4 rounded-2xl cute-border shadow-cute-lg hover:shadow-cute hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-3">
+                    <!-- 眼睛插畫 -->
+                    <svg class="w-6 h-6 stroke-white fill-none stroke-[8]" viewBox="0 0 100 100">
+                        <path d="M10 50 Q50 15 90 50 Q50 85 10 50 Z" />
+                        <circle cx="50" cy="50" r="15" class="fill-white stroke-none" />
+                        <circle cx="50" cy="50" r="7" class="fill-charcoal stroke-none" />
+                    </svg>
+                    <span>看看可愛案例</span>
+                </a>
+                <a href="#contact" class="w-full sm:w-auto bg-white text-charcoal text-lg font-bold px-8 py-4 rounded-2xl cute-border shadow-cute-lg hover:shadow-cute hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-3">
+                    <!-- 對話框手繪插畫 -->
+                    <svg class="w-6 h-6 stroke-charcoal fill-blush-pink stroke-[7]" viewBox="0 0 100 100">
+                        <path d="M20 20 H80 C88 20 88 60 80 60 H40 L20 80 V60 C12 60 12 20 20 20 Z" />
+                    </svg>
+                    <span>免費聊聊需求</span>
+                </a>
+            </div>
+
+            <!-- 可愛吉祥物／手繪調色盤插畫卡片 -->
+            <div class="mt-12 sm:mt-16 relative max-w-2xl mx-auto">
+                <div class="bg-white p-6 sm:p-8 rounded-3xl cute-border shadow-cute-lg relative z-10 flex flex-col sm:flex-row items-center gap-6">
+                    <div class="w-28 h-28 sm:w-32 sm:w-32 shrink-0 bg-warm-yellow rounded-2xl cute-border flex items-center justify-center p-3 relative animate-wiggle">
+                        <!-- 調色盤與畫筆手繪 SVG -->
+                        <svg class="w-full h-full stroke-charcoal fill-white stroke-[5]" viewBox="0 0 100 100">
+                            <path d="M20 50 C10 20 50 10 75 25 C95 38 90 75 65 85 C45 92 25 80 20 50 Z" class="fill-cream" />
+                            <circle cx="35" cy="35" r="6" class="fill-soft-orange stroke-none" />
+                            <circle cx="55" cy="30" r="6" class="fill-blush-pink stroke-none" />
+                            <circle cx="70" cy="45" r="6" class="fill-mint-green stroke-none" />
+                            <circle cx="65" cy="65" r="7" class="fill-white stroke-charcoal stroke-[4]" />
+                            <path d="M30 85 L75 35" class="stroke-charcoal stroke-[8]" stroke-linecap="round" />
+                            <path d="M75 35 L85 25 L80 20 L70 30 Z" class="fill-soft-orange stroke-charcoal stroke-[4]" />
+                        </svg>
+                        <span class="absolute -top-2 -right-2 bg-blush-pink text-xs font-bold px-2.5 py-0.5 rounded-full cute-border">設計中!</span>
+                    </div>
+                    <div class="text-left">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="font-black text-lg">為什麼叫「但幾列」？</span>
+                            <span class="bg-mint-green text-xs font-bold px-2 py-0.5 rounded-full cute-border">台語：等一下</span>
+                        </div>
+                        <p class="text-sm text-clay leading-relaxed">
+                            在步調飛快的世界裡，希望大家能「但幾列（停一下）」，給自己放鬆看好設計的時間。我們深信：**可愛是最好的溝通橋樑**！
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 品牌特色區塊 (Why Us) -->
+    <section id="about" class="py-16 bg-white border-y-4 border-charcoal relative">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-soft-orange font-bold text-sm tracking-widest uppercase">OUR FEATURES</span>
+                <h2 class="text-3xl sm:text-4xl font-black mt-1">我們有什麼不一樣？</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 特色 1 (電燈泡插畫) -->
+                <div class="bg-cream p-8 rounded-3xl cute-border shadow-cute hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-16 h-16 bg-warm-yellow rounded-2xl cute-border flex items-center justify-center p-3 mb-6 shadow-cute">
+                        <svg class="w-full h-full stroke-charcoal fill-white stroke-[6]" viewBox="0 0 100 100">
+                            <path d="M30 40 C30 15 70 15 70 40 C70 55 60 60 60 70 H40 C40 60 30 55 30 40 Z" />
+                            <path d="M40 70 H60 V80 H40 Z" class="fill-charcoal" />
+                            <path d="M45 85 H55" stroke-linecap="round" />
+                            <path d="M50 10 V0 M15 35 L5 30 M85 35 L95 30" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">淺顯易懂，溝通超順暢</h3>
+                    <p class="text-clay text-sm leading-relaxed">
+                        拒絕深奧詞彙！我們用最接地氣、最直覺的對話，幫您釐清真正需要的設計方向與目標。
+                    </p>
+                </div>
+
+                <!-- 特色 2 (泰迪熊頭像插畫) -->
+                <div class="bg-cream p-8 rounded-3xl cute-border shadow-cute hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-16 h-16 bg-blush-pink rounded-2xl cute-border flex items-center justify-center p-2 mb-6 shadow-cute">
+                        <svg class="w-full h-full stroke-charcoal fill-white stroke-[6]" viewBox="0 0 100 100">
+                            <circle cx="25" cy="25" r="15" class="fill-blush-pink" />
+                            <circle cx="75" cy="25" r="15" class="fill-blush-pink" />
+                            <circle cx="50" cy="55" r="35" class="fill-cream" />
+                            <ellipse cx="50" cy="62" rx="15" ry="10" class="fill-white" />
+                            <circle cx="50" cy="58" r="5" class="fill-charcoal" />
+                            <circle cx="38" cy="48" r="4" class="fill-charcoal" />
+                            <circle cx="62" cy="48" r="4" class="fill-charcoal" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">溫暖童趣，有價值的可愛</h3>
+                    <p class="text-clay text-sm leading-relaxed">
+                        可愛不只是好看，更是強大的親和力。我們將童趣視覺注入品牌，讓訪客看一眼就印象深刻！
+                    </p>
+                </div>
+
+                <!-- 特色 3 (標靶與箭頭插畫) -->
+                <div class="bg-cream p-8 rounded-3xl cute-border shadow-cute hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-16 h-16 bg-mint-green rounded-2xl cute-border flex items-center justify-center p-2.5 mb-6 shadow-cute">
+                        <svg class="w-full h-full stroke-charcoal stroke-[6] fill-none" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="40" class="fill-white" />
+                            <circle cx="50" cy="50" r="25" class="fill-mint-green" />
+                            <circle cx="50" cy="50" r="10" class="fill-soft-orange" />
+                            <path d="M70 20 L90 5 M80 5 L90 5 L90 15" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">為您解決「尋找」的煩惱</h3>
+                    <p class="text-clay text-sm leading-relaxed">
+                        專為需要尋找靈感、尋找解答的您設計。無論是小品牌起步還是舊包裝翻新，我們都能給出完美提案。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 案例展示區塊 (Portfolio) -->
+    <section id="portfolio" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <!-- 區塊標頭 -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div class="flex items-center gap-3">
+                    <div>
+                        <span class="text-soft-orange font-bold text-sm tracking-widest uppercase">PORTFOLIO</span>
+                        <h2 class="text-3xl sm:text-4xl font-black mt-1">精選設計案例</h2>
+                    </div>
+                    <!-- 貓咪頭像手繪插畫 -->
+                    <div class="w-10 h-10 animate-bounce-gentle">
+                        <svg class="w-full h-full stroke-charcoal stroke-[6] fill-warm-yellow" viewBox="0 0 100 100">
+                            <path d="M20 30 L35 10 L45 35 L55 35 L65 10 L80 30 C85 50 85 80 50 85 C15 80 15 50 20 30 Z" />
+                            <circle cx="35" cy="50" r="4" class="fill-charcoal" />
+                            <circle cx="65" cy="50" r="4" class="fill-charcoal" />
+                            <path d="M45 60 Q50 65 55 60" stroke-linecap="round" class="fill-none" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- 分類篩選按鈕 -->
+                <div class="flex flex-wrap gap-2" id="portfolio-filters">
+                    <button class="filter-btn active bg-charcoal text-white px-4 py-2 rounded-full text-xs font-bold cute-border shadow-cute transition-all" data-filter="all">全部作品</button>
+                    <button class="filter-btn bg-white text-charcoal px-4 py-2 rounded-full text-xs font-bold cute-border shadow-cute hover:bg-warm-yellow transition-all" data-filter="brand">品牌識別</button>
+                    <button class="filter-btn bg-white text-charcoal px-4 py-2 rounded-full text-xs font-bold cute-border shadow-cute hover:bg-blush-pink transition-all" data-filter="illustration">插畫視覺</button>
+                    <button class="filter-btn bg-white text-charcoal px-4 py-2 rounded-full text-xs font-bold cute-border shadow-cute hover:bg-mint-green transition-all" data-filter="packaging">包裝/平面</button>
+                </div>
+            </div>
+
+            <!-- 案例列表網格 (手繪插畫風格展示) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+                
+                <!-- 案例 1 (吐司貓插畫) -->
+                <div class="portfolio-item brand bg-white rounded-3xl cute-border overflow-hidden shadow-cute hover:shadow-cute-lg transition-all group cursor-pointer" onclick="openModal('modal1')">
+                    <div class="relative bg-warm-yellow p-8 h-60 flex items-center justify-center overflow-hidden border-b-4 border-charcoal">
+                        <div class="w-32 h-32 group-hover:scale-110 transition-transform duration-300 relative flex items-center justify-center">
+                            <!-- 吐司貓手繪 SVG -->
+                            <svg class="w-full h-full stroke-charcoal stroke-[5] fill-white" viewBox="0 0 100 100">
+                                <path d="M20 30 C20 15 80 15 80 30 C85 50 85 80 80 85 C50 90 20 85 20 85 C15 70 15 50 20 30 Z" class="fill-warm-yellow" />
+                                <path d="M25 35 C25 25 75 25 75 35 C80 50 80 75 75 80 C50 83 25 80 25 80 C20 68 20 50 25 35 Z" class="fill-cream" />
+                                <circle cx="40" cy="50" r="4" class="fill-charcoal" />
+                                <circle cx="60" cy="50" r="4" class="fill-charcoal" />
+                                <path d="M47 58 Q50 62 53 58" class="fill-none stroke-linecap-round" />
+                                <path d="M25 50 H15 M25 55 H18 M75 50 H85 M75 55 H82" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-white text-xs font-bold px-3 py-1 rounded-full cute-border">品牌識別</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-xl mb-2 group-hover:text-soft-orange transition-colors">喵喵烘焙坊 IP 品牌重構</h3>
+                        <p class="text-clay text-sm line-clamp-2">用貓咪與吐司結合的童趣視覺，讓原本冷清的社區麵包店營業額提升 150%！</p>
+                        <div class="mt-4 flex items-center justify-between text-xs font-bold text-soft-orange">
+                            <span>點擊了解更多故事 ➔</span>
+                            <!-- 愛心插畫 -->
+                            <svg class="w-4 h-4 fill-blush-pink stroke-charcoal stroke-[8]" viewBox="0 0 100 100">
+                                <path d="M50 85 C20 60 5 40 20 20 C35 5 50 25 50 25 C50 25 65 5 80 20 C95 40 80 60 50 85 Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 案例 2 (果汁盒手繪插畫) -->
+                <div class="portfolio-item illustration bg-white rounded-3xl cute-border overflow-hidden shadow-cute hover:shadow-cute-lg transition-all group cursor-pointer" onclick="openModal('modal2')">
+                    <div class="relative bg-blush-pink p-8 h-60 flex items-center justify-center overflow-hidden border-b-4 border-charcoal">
+                        <div class="w-32 h-32 group-hover:scale-110 transition-transform duration-300 relative flex items-center justify-center">
+                            <!-- 果汁盒插畫 SVG -->
+                            <svg class="w-full h-full stroke-charcoal stroke-[5] fill-white" viewBox="0 0 100 100">
+                                <path d="M30 35 L50 20 L70 35 L70 85 L30 85 Z" class="fill-cream" />
+                                <path d="M30 35 L70 35" />
+                                <path d="M50 20 V85" stroke-dasharray="4 4" />
+                                <path d="M58 10 L65 22" class="stroke-[8] stroke-soft-orange" stroke-linecap="round" />
+                                <circle cx="50" cy="60" r="12" class="fill-soft-orange" />
+                                <path d="M50 48 Q55 42 60 48" class="fill-mint-green" />
+                            </svg>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-white text-xs font-bold px-3 py-1 rounded-full cute-border">插畫視覺</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-xl mb-2 group-hover:text-soft-orange transition-colors">果果果汁手繪系列包裝</h3>
+                        <p class="text-clay text-sm line-clamp-2">以溫暖手繪水果精靈為主角，把「喝果汁」變成一件好玩的童年記憶。</p>
+                        <div class="mt-4 flex items-center justify-between text-xs font-bold text-soft-orange">
+                            <span>點擊了解更多故事 ➔</span>
+                            <svg class="w-4 h-4 fill-blush-pink stroke-charcoal stroke-[8]" viewBox="0 0 100 100">
+                                <path d="M50 85 C20 60 5 40 20 20 C35 5 50 25 50 25 C50 25 65 5 80 20 C95 40 80 60 50 85 Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 案例 3 (咖啡杯手繪插畫) -->
+                <div class="portfolio-item packaging bg-white rounded-3xl cute-border overflow-hidden shadow-cute hover:shadow-cute-lg transition-all group cursor-pointer" onclick="openModal('modal3')">
+                    <div class="relative bg-mint-green p-8 h-60 flex items-center justify-center overflow-hidden border-b-4 border-charcoal">
+                        <div class="w-32 h-32 group-hover:scale-110 transition-transform duration-300 relative flex items-center justify-center">
+                            <!-- 咖啡杯插畫 SVG -->
+                            <svg class="w-full h-full stroke-charcoal stroke-[5] fill-white" viewBox="0 0 100 100">
+                                <path d="M25 35 L32 80 C33 85 67 85 68 80 L75 35 Z" class="fill-cream" />
+                                <path d="M75 45 C88 45 88 65 73 68" class="fill-none stroke-[6]" />
+                                <path d="M20 30 C20 25 80 25 80 30 L78 35 H22 Z" class="fill-soft-orange" />
+                                <!-- 熱氣煙霧 -->
+                                <path d="M38 20 C35 15 42 10 38 5 M50 20 C47 15 54 10 50 5 M62 20 C59 15 66 10 62 5" class="fill-none stroke-charcoal stroke-[4]" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-white text-xs font-bold px-3 py-1 rounded-full cute-border">包裝/平面</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-xl mb-2 group-hover:text-soft-orange transition-colors">懶懶咖啡濾掛包設計</h3>
+                        <p class="text-clay text-sm line-clamp-2">專為上班族設計的療癒系繪本風咖啡包，讓每天早晨都充滿溫暖能量。</p>
+                        <div class="mt-4 flex items-center justify-between text-xs font-bold text-soft-orange">
+                            <span>點擊了解更多故事 ➔</span>
+                            <svg class="w-4 h-4 fill-blush-pink stroke-charcoal stroke-[8]" viewBox="0 0 100 100">
+                                <path d="M50 85 C20 60 5 40 20 20 C35 5 50 25 50 25 C50 25 65 5 80 20 C95 40 80 60 50 85 Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 案例 4 (打開的繪本插畫) -->
+                <div class="portfolio-item brand bg-white rounded-3xl cute-border overflow-hidden shadow-cute hover:shadow-cute-lg transition-all group cursor-pointer" onclick="openModal('modal4')">
+                    <div class="relative bg-sky-blue p-8 h-60 flex items-center justify-center overflow-hidden border-b-4 border-charcoal">
+                        <div class="w-32 h-32 group-hover:scale-110 transition-transform duration-300 relative flex items-center justify-center">
+                            <!-- 打開的書本手繪 SVG -->
+                            <svg class="w-full h-full stroke-charcoal stroke-[5] fill-white" viewBox="0 0 100 100">
+                                <path d="M10 35 Q50 25 50 40 Q50 25 90 35 V75 Q50 65 50 80 Q50 65 10 75 Z" class="fill-cream" />
+                                <path d="M50 40 V80" />
+                                <path d="M20 48 Q35 43 42 50 M20 58 Q35 53 42 60 M58 50 Q65 43 80 48 M58 60 Q65 53 80 58" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-white text-xs font-bold px-3 py-1 rounded-full cute-border">品牌識別</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-xl mb-2 group-hover:text-soft-orange transition-colors">小島獨立書店識別系統</h3>
+                        <p class="text-clay text-sm line-clamp-2">簡化複雜的文化符號，用可愛的書本造型小島打造大人小孩都愛親近的空間。</p>
+                        <div class="mt-4 flex items-center justify-between text-xs font-bold text-soft-orange">
+                            <span>點擊了解更多故事 ➔</span>
+                            <svg class="w-4 h-4 fill-blush-pink stroke-charcoal stroke-[8]" viewBox="0 0 100 100">
+                                <path d="M50 85 C20 60 5 40 20 20 C35 5 50 25 50 25 C50 25 65 5 80 20 C95 40 80 60 50 85 Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 案例 5 (小恐龍手繪插畫) -->
+                <div class="portfolio-item illustration bg-white rounded-3xl cute-border overflow-hidden shadow-cute hover:shadow-cute-lg transition-all group cursor-pointer" onclick="openModal('modal1')">
+                    <div class="relative bg-warm-yellow p-8 h-60 flex items-center justify-center overflow-hidden border-b-4 border-charcoal">
+                        <div class="w-32 h-32 group-hover:scale-110 transition-transform duration-300 relative flex items-center justify-center">
+                            <!-- 可愛恐龍手繪 SVG -->
+                            <svg class="w-full h-full stroke-charcoal stroke-[5] fill-mint-green" viewBox="0 0 100 100">
+                                <path d="M30 85 C20 85 20 65 30 50 C25 30 45 15 65 20 C80 25 85 45 70 50 C80 60 85 85 65 85 Z" />
+                                <circle cx="55" cy="32" r="4" class="fill-charcoal" />
+                                <path d="M35 25 L30 18 M48 20 L48 10 M62 22 L68 15" stroke-linecap="round" stroke-width="6" />
+                                <path d="M38 70 Q45 75 50 70" stroke-linecap="round" class="fill-none" />
+                            </svg>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-white text-xs font-bold px-3 py-1 rounded-full cute-border">插畫視覺</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-xl mb-2 group-hover:text-soft-orange transition-colors">兒童恐龍科普特展周邊</h3>
+                        <p class="text-clay text-sm line-clamp-2">把兇猛的恐龍變成可親的萌獸，成功吸引上萬家庭到場觀展體驗。</p>
+                        <div class="mt-4 flex items-center justify-between text-xs font-bold text-soft-orange">
+                            <span>點擊了解更多故事 ➔</span>
+                            <svg class="w-4 h-4 fill-blush-pink stroke-charcoal stroke-[8]" viewBox="0 0 100 100">
+                                <path d="M50 85 C20 60 5 40 20 20 C35 5 50 25 50 25 C50 25 65 5 80 20 C95 40 80 60 50 85 Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 案例 6 (餅乾盒手繪插畫) -->
+                <div class="portfolio-item packaging bg-white rounded-3xl cute-border overflow-hidden shadow-cute hover:shadow-cute-lg transition-all group cursor-pointer" onclick="openModal('modal2')">
+                    <div class="relative bg-blush-pink p-8 h-60 flex items-center justify-center overflow-hidden border-b-4 border-charcoal">
+                        <div class="w-32 h-32 group-hover:scale-110 transition-transform duration-300 relative flex items-center justify-center">
+                            <!-- 手作餅乾手繪 SVG -->
+                            <svg class="w-full h-full stroke-charcoal stroke-[5] fill-warm-yellow" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="35" class="fill-warm-yellow" />
+                                <path d="M20 50 Q15 45 20 40 Q25 35 30 38" class="fill-cream" />
+                                <circle cx="38" cy="38" r="4" class="fill-charcoal" />
+                                <circle cx="62" cy="42" r="5" class="fill-charcoal" />
+                                <circle cx="45" cy="65" r="4" class="fill-charcoal" />
+                                <circle cx="60" cy="62" r="3" class="fill-charcoal" />
+                            </svg>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-white text-xs font-bold px-3 py-1 rounded-full cute-border">包裝/平面</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-xl mb-2 group-hover:text-soft-orange transition-colors">手作手工餅乾禮盒設計</h3>
+                        <p class="text-clay text-sm line-clamp-2">童話書風格的拉頁禮盒，拆開包裝就像在閱讀一本美味的繪本冒險故事。</p>
+                        <div class="mt-4 flex items-center justify-between text-xs font-bold text-soft-orange">
+                            <span>點擊了解更多故事 ➔</span>
+                            <svg class="w-4 h-4 fill-blush-pink stroke-charcoal stroke-[8]" viewBox="0 0 100 100">
+                                <path d="M50 85 C20 60 5 40 20 20 C35 5 50 25 50 25 C50 25 65 5 80 20 C95 40 80 60 50 85 Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 合作流程區塊 (Process - 帶手繪流程插畫) -->
+    <section id="process" class="py-20 bg-warm-yellow/30 border-y-4 border-charcoal relative">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-soft-orange font-bold text-sm tracking-widest uppercase">HOW WE WORK</span>
+                <h2 class="text-3xl sm:text-4xl font-black mt-1">輕鬆 4 步驟，設計就搞定 🚀</h2>
+                <p class="text-clay text-sm mt-2">清楚明瞭的流程，不會讓您一頭霧水！</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 步驟 1 (咖啡杯插畫) -->
+                <div class="bg-white p-6 rounded-3xl cute-border shadow-cute relative flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-warm-yellow rounded-full cute-border flex items-center justify-center font-black text-lg absolute -top-6">
+                        1
+                    </div>
+                    <div class="w-20 h-20 my-4 pt-2">
+                        <svg class="w-full h-full stroke-charcoal stroke-[5] fill-cream" viewBox="0 0 100 100">
+                            <path d="M25 40 H75 L70 85 H30 Z" />
+                            <path d="M75 50 C85 50 85 70 72 72" class="fill-none stroke-[6]" />
+                            <path d="M40 25 C35 20 45 15 40 10 M60 25 C55 20 65 15 60 10" stroke-linecap="round" class="fill-none" />
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">但幾列，聊聊天</h3>
+                    <p class="text-clay text-xs leading-relaxed">
+                        與我們聯繫，分享您的想法與需求。放心，我們不說專業難懂的術語！
+                    </p>
+                </div>
+
+                <!-- 步驟 2 (鉛筆草稿插畫) -->
+                <div class="bg-white p-6 rounded-3xl cute-border shadow-cute relative flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-blush-pink rounded-full cute-border flex items-center justify-center font-black text-lg absolute -top-6">
+                        2
+                    </div>
+                    <div class="w-20 h-20 my-4 pt-2">
+                        <svg class="w-full h-full stroke-charcoal stroke-[5] fill-blush-pink" viewBox="0 0 100 100">
+                            <path d="M25 75 L70 30 L80 40 L35 85 Z" />
+                            <path d="M25 75 L15 88 L35 85 Z" class="fill-warm-yellow" />
+                            <path d="M70 30 L75 20 L85 30 L80 40 Z" class="fill-charcoal" />
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">開始塗鴉草稿</h3>
+                    <p class="text-clay text-xs leading-relaxed">
+                        轉化想法為視覺概念草圖，提供明確方向進行討論與調整。
+                    </p>
+                </div>
+
+                <!-- 步驟 3 (魔法棒手繪插畫) -->
+                <div class="bg-white p-6 rounded-3xl cute-border shadow-cute relative flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-mint-green rounded-full cute-border flex items-center justify-center font-black text-lg absolute -top-6">
+                        3
+                    </div>
+                    <div class="w-20 h-20 my-4 pt-2">
+                        <svg class="w-full h-full stroke-charcoal stroke-[5] fill-warm-yellow" viewBox="0 0 100 100">
+                            <path d="M20 80 L60 40" class="stroke-[10]" stroke-linecap="round" />
+                            <path d="M60 25 L65 38 L78 40 L68 50 L70 63 L60 55 L50 63 L52 50 L42 40 L55 38 Z" />
+                            <circle cx="80" cy="20" r="3" class="fill-charcoal stroke-none" />
+                            <circle cx="30" cy="30" r="4" class="fill-charcoal stroke-none" />
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">施展可愛魔法</h3>
+                    <p class="text-clay text-xs leading-relaxed">
+                        進行細節繪製、配色與排版優化，打造兼具美感與實用性的完成品。
+                    </p>
+                </div>
+
+                <!-- 步驟 4 (禮物盒手繪插畫) -->
+                <div class="bg-white p-6 rounded-3xl cute-border shadow-cute relative flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-sky-blue rounded-full cute-border flex items-center justify-center font-black text-lg absolute -top-6">
+                        4
+                    </div>
+                    <div class="w-20 h-20 my-4 pt-2">
+                        <svg class="w-full h-full stroke-charcoal stroke-[5] fill-sky-blue" viewBox="0 0 100 100">
+                            <rect x="20" y="45" width="60" height="40" rx="5" />
+                            <rect x="15" y="35" width="70" height="15" rx="3" class="fill-soft-orange" />
+                            <path d="M50 35 V85" class="stroke-[6]" />
+                            <path d="M50 35 C35 20 30 35 50 35 C70 35 65 20 50 35 Z" class="fill-blush-pink" />
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2">歡樂交件使用</h3>
+                    <p class="text-clay text-xs leading-relaxed">
+                        提供完整的檔案（或印刷定稿檔），讓您的品牌帶著亮眼作品出發！
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服務項目區塊 (Services - 帶手繪插畫圖示) -->
+    <section id="services" class="py-20 px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-soft-orange font-bold text-sm tracking-widest uppercase">SERVICES</span>
+                <h2 class="text-3xl sm:text-4xl font-black mt-1">我們能幫您做什麼？</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- 服務 1 -->
+                <div class="bg-white p-6 rounded-3xl cute-border shadow-cute flex items-start gap-4">
+                    <div class="w-14 h-14 bg-warm-yellow rounded-2xl cute-border flex items-center justify-center p-2.5 shrink-0">
+                        <svg class="w-full h-full stroke-charcoal stroke-[6] fill-white" viewBox="0 0 100 100">
+                            <path d="M20 75 Q50 85 80 75 L85 25 L15 25 Z" class="fill-cream" />
+                            <path d="M15 25 L50 40 L85 25" />
+                            <circle cx="50" cy="58" r="8" class="fill-soft-orange stroke-none" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-1">品牌形象與 LOGO 設計</h3>
+                        <p class="text-clay text-sm">標誌設計、標準字、品牌色彩規範、吉祥物角色 IP 建立。</p>
+                    </div>
+                </div>
+
+                <!-- 服務 2 -->
+                <div class="bg-white p-6 rounded-3xl cute-border shadow-cute flex items-start gap-4">
+                    <div class="w-14 h-14 bg-blush-pink rounded-2xl cute-border flex items-center justify-center p-2.5 shrink-0">
+                        <svg class="w-full h-full stroke-charcoal stroke-[6] fill-white" viewBox="0 0 100 100">
+                            <rect x="20" y="25" width="60" height="55" rx="5" class="fill-blush-pink" />
+                            <path d="M30 25 V15 C30 10 70 10 70 15 V25" />
+                            <circle cx="50" cy="52" r="10" class="fill-white" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-1">插畫繪製與包裝設計</h3>
+                        <p class="text-clay text-sm">商品包裝外盒、貼紙、繪本風格插畫、商業書籍封面。</p>
+                    </div>
+                </div>
+
+                <!-- 服務 3 -->
+                <div class="bg-white p-6 rounded-3xl cute-border shadow-cute flex items-start gap-4">
+                    <div class="w-14 h-14 bg-mint-green rounded-2xl cute-border flex items-center justify-center p-2.5 shrink-0">
+                        <svg class="w-full h-full stroke-charcoal stroke-[6] fill-white" viewBox="0 0 100 100">
+                            <rect x="25" y="15" width="50" height="70" rx="8" class="fill-cream" />
+                            <line x1="40" y1="25" x2="60" y2="25" stroke-linecap="round" />
+                            <circle cx="50" cy="73" r="4" class="fill-charcoal" />
+                            <rect x="35" y="35" width="30" height="25" rx="3" class="fill-mint-green" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-1">社群視覺與宣傳文宣</h3>
+                        <p class="text-clay text-sm">IG/FB 貼文模板、LINE 貼圖、海報、菜單、名片設計。</p>
+                    </div>
+                </div>
+
+                <!-- 服務 4 -->
+                <div class="bg-white p-6 rounded-3xl cute-border shadow-cute flex items-start gap-4">
+                    <div class="w-14 h-14 bg-sky-blue rounded-2xl cute-border flex items-center justify-center p-2.5 shrink-0">
+                        <svg class="w-full h-full stroke-charcoal stroke-[6] fill-white" viewBox="0 0 100 100">
+                            <rect x="15" y="20" width="70" height="50" rx="5" class="fill-sky-blue" />
+                            <path d="M10 70 H90 V78 H10 Z" class="fill-charcoal" />
+                            <path d="M40 78 L35 88 H65 L60 78" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-1">可愛風網站 UI 設計</h3>
+                        <p class="text-clay text-sm">一頁式官網設計、童趣風形象網站建置、互動元素規劃。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 聯絡我們區塊 (Contact) -->
+    <section id="contact" class="py-20 px-4 bg-blush-pink/40 border-t-4 border-charcoal relative">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white p-8 sm:p-12 rounded-4xl cute-border shadow-cute-lg relative">
+                
+                <div class="text-center mb-10">
+                    <span class="bg-warm-yellow text-xs font-bold px-3 py-1 rounded-full cute-border mb-3 inline-block">SAY HELLO!</span>
+                    <h2 class="text-3xl sm:text-4xl font-black">與但幾列聊聊您的想法 👋</h2>
+                    <p class="text-clay text-sm mt-2">無論您是有明確的需求，還是只有模糊的靈感，都歡迎填寫表單！</p>
+                </div>
+
+                <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- 姓名 -->
+                        <div>
+                            <label class="block font-bold text-sm mb-2" for="name">您的稱呼 *</label>
+                            <input type="text" id="name" required placeholder="例如：林小明 / 阿貓" class="w-full bg-cream cute-border rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-soft-orange">
+                        </div>
+                        <!-- Email -->
+                        <div>
+                            <label class="block font-bold text-sm mb-2" for="email">電子郵件 / LINE ID *</label>
+                            <input type="text" id="email" required placeholder="方便我們回覆您的聯絡方式" class="w-full bg-cream cute-border rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-soft-orange">
+                        </div>
+                    </div>
+
+                    <!-- 需求類型 -->
+                    <div>
+                        <label class="block font-bold text-sm mb-2">您正在尋找什麼樣的服務？ (可複選)</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <label class="cursor-pointer">
+                                <input type="checkbox" name="service" value="brand" class="peer hidden">
+                                <div class="bg-cream cute-border rounded-xl p-3 text-center text-xs font-bold peer-checked:bg-warm-yellow transition-all flex items-center justify-center gap-1">
+                                    <span>🏷️ 品牌/LOGO</span>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="checkbox" name="service" value="packaging" class="peer hidden">
+                                <div class="bg-cream cute-border rounded-xl p-3 text-center text-xs font-bold peer-checked:bg-warm-yellow transition-all flex items-center justify-center gap-1">
+                                    <span>📦 插畫/包裝</span>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="checkbox" name="service" value="social" class="peer hidden">
+                                <div class="bg-cream cute-border rounded-xl p-3 text-center text-xs font-bold peer-checked:bg-warm-yellow transition-all flex items-center justify-center gap-1">
+                                    <span>📱 社群/文宣</span>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="checkbox" name="service" value="web" class="peer hidden">
+                                <div class="bg-cream cute-border rounded-xl p-3 text-center text-xs font-bold peer-checked:bg-warm-yellow transition-all flex items-center justify-center gap-1">
+                                    <span>💻 網站設計</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 訊息內容 -->
+                    <div>
+                        <label class="block font-bold text-sm mb-2" for="message">簡單描述您的想法或問題</label>
+                        <textarea id="message" rows="4" placeholder="例如：我想開一家可愛的咖啡店，需要 LOGO 和貼紙設計..." class="w-full bg-cream cute-border rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-soft-orange"></textarea>
+                    </div>
+
+                    <!-- 送出按鈕 -->
+                    <button type="submit" class="w-full bg-soft-orange text-white font-bold text-lg py-4 rounded-2xl cute-border shadow-cute hover:shadow-cute-hover hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2">
+                        <span>送信給但幾列</span>
+                        <!-- 信封插畫 -->
+                        <svg class="w-6 h-6 stroke-white fill-none stroke-[8]" viewBox="0 0 100 100">
+                            <rect x="15" y="25" width="70" height="50" rx="6" class="fill-warm-yellow" />
+                            <path d="M15 25 L50 55 L85 25" />
+                        </svg>
+                    </button>
+                </form>
+
+                <!-- 聯絡成功通知 Box (預設隱藏) -->
+                <div id="success-message" class="hidden bg-mint-green p-6 rounded-3xl cute-border text-center my-4">
+                    <div class="w-16 h-16 mx-auto mb-2">
+                        <svg class="w-full h-full stroke-charcoal stroke-[6] fill-warm-yellow" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="40" />
+                            <path d="M30 50 L45 65 L70 35" stroke-linecap="round" stroke-linejoin="round" class="fill-none stroke-[10]" />
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-xl mb-1">收到您的訊息囉！</h3>
+                    <p class="text-sm">感謝您的聯繫，「但幾列」會盡快在 1-2 個工作天內回覆您！</p>
+                </div>
+
+                <!-- 快速社交連結 -->
+                <div class="mt-10 pt-8 border-t-2 border-dashed border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-clay">
+                    <div>直接 Email 聯繫：<a href="mailto:hello@waitasec.design" class="text-charcoal underline">hello@waitasec.design</a></div>
+                    <div class="flex gap-4 text-base">
+                        <a href="#" class="hover:text-soft-orange">Instagram</a> ·
+                        <a href="#" class="hover:text-soft-orange">LINE 官方帳號</a> ·
+                        <a href="#" class="hover:text-soft-orange">Behance</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 Footer -->
+    <footer class="bg-charcoal text-cream py-8 text-center text-xs">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6">
+                    <svg viewBox="0 0 100 100" class="w-full h-full fill-none stroke-cream stroke-[10]">
+                        <path d="M25 20 H75 M25 80 H75 M30 20 L50 48 L70 20 M30 80 L50 52 L70 80" />
+                    </svg>
+                </div>
+                <span class="font-bold">但幾列 Wait A Sec Design Studio</span>
+            </div>
+            <div>
+                © 2026 但幾列 Design. All rights reserved. 用童趣讓世界更美好！
+            </div>
+        </div>
+    </footer>
+
+    <!-- 案例 Modal 彈窗 1 -->
+    <div id="modal1" class="fixed inset-0 bg-charcoal/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white max-w-2xl w-full rounded-4xl cute-border shadow-cute-lg p-6 sm:p-8 max-h-[90vh] overflow-y-auto relative animate-float" style="animation-duration: 0.3s;">
+            <button onclick="closeModal('modal1')" class="absolute top-4 right-4 w-10 h-10 bg-warm-yellow rounded-full cute-border flex items-center justify-center font-bold text-lg hover:rotate-90 transition-transform">✕</button>
+            
+            <div class="bg-warm-yellow p-8 rounded-3xl cute-border text-center mb-6 flex flex-col items-center">
+                <div class="w-32 h-32 mb-2">
+                    <svg class="w-full h-full stroke-charcoal stroke-[5] fill-white" viewBox="0 0 100 100">
+                        <path d="M20 30 C20 15 80 15 80 30 C85 50 85 80 80 85 C50 90 20 85 20 85 C15 70 15 50 20 30 Z" class="fill-warm-yellow" />
+                        <path d="M25 35 C25 25 75 25 75 35 C80 50 80 75 75 80 C50 83 25 80 25 80 C20 68 20 50 25 35 Z" class="fill-cream" />
+                        <circle cx="40" cy="50" r="4" class="fill-charcoal" />
+                        <circle cx="60" cy="50" r="4" class="fill-charcoal" />
+                        <path d="M47 58 Q50 62 53 58" class="fill-none stroke-linecap-round" />
+                    </svg>
+                </div>
+                <h3 class="font-black text-2xl">喵喵烘焙坊 IP 品牌重構</h3>
+            </div>
+
+            <div class="space-y-4 text-sm text-charcoal">
+                <div class="bg-cream p-4 rounded-2xl cute-border">
+                    <span class="font-bold text-soft-orange">💡 設計背後故事：</span>
+                    <p class="mt-1 text-clay">喵喵烘焙坊是一家位在社區轉角的傳統麵包店。創辦人很喜歡貓咪，希望打破傳統麵包店單調的印象。我們幫他設計了「吐司貓咪」IP 吉祥物，並將此視覺應用於包裝袋、招牌與印章，讓購買麵包過程變成療癒的過程。</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 font-bold text-xs">
+                    <div class="bg-blush-pink/40 p-3 rounded-xl cute-border">專案內容：品牌識別、吉祥物設計、包裝袋</div>
+                    <div class="bg-mint-green/40 p-3 rounded-xl cute-border">設計風格：溫暖童趣、日系插畫</div>
+                </div>
+            </div>
+
+            <button onclick="closeModal('modal1')" class="w-full mt-6 bg-charcoal text-white font-bold py-3 rounded-2xl cute-border">關閉視窗</button>
+        </div>
+    </div>
+
+    <!-- 案例 Modal 彈窗 2 -->
+    <div id="modal2" class="fixed inset-0 bg-charcoal/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white max-w-2xl w-full rounded-4xl cute-border shadow-cute-lg p-6 sm:p-8 max-h-[90vh] overflow-y-auto relative animate-float" style="animation-duration: 0.3s;">
+            <button onclick="closeModal('modal2')" class="absolute top-4 right-4 w-10 h-10 bg-warm-yellow rounded-full cute-border flex items-center justify-center font-bold text-lg hover:rotate-90 transition-transform">✕</button>
+            
+            <div class="bg-blush-pink p-8 rounded-3xl cute-border text-center mb-6 flex flex-col items-center">
+                <div class="w-32 h-32 mb-2">
+                    <svg class="w-full h-full stroke-charcoal stroke-[5] fill-white" viewBox="0 0 100 100">
+                        <path d="M30 35 L50 20 L70 35 L70 85 L30 85 Z" class="fill-cream" />
+                        <path d="M30 35 L70 35" />
+                        <circle cx="50" cy="60" r="12" class="fill-soft-orange" />
+                    </svg>
+                </div>
+                <h3 class="font-black text-2xl">果果果汁手繪系列包裝</h3>
+            </div>
+
+            <div class="space-y-4 text-sm text-charcoal">
+                <div class="bg-cream p-4 rounded-2xl cute-border">
+                    <span class="font-bold text-soft-orange">💡 設計背後故事：</span>
+                    <p class="mt-1 text-clay">市面上的果汁包裝大多展示水果照片，略顯單調。我們以童趣手繪繪本風格，繪製了「水果大冒險」的主題角色。每瓶果汁背面都有一個微型小故事，推出後在社群網站引起熱烈拍照打卡話題！</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 font-bold text-xs">
+                    <div class="bg-warm-yellow/40 p-3 rounded-xl cute-border">專案內容：瓶身插畫、產品包裝、社群圖片</div>
+                    <div class="bg-sky-blue/40 p-3 rounded-xl cute-border">設計風格：色彩豐富、繽紛童趣</div>
+                </div>
+            </div>
+
+            <button onclick="closeModal('modal2')" class="w-full mt-6 bg-charcoal text-white font-bold py-3 rounded-2xl cute-border">關閉視窗</button>
+        </div>
+    </div>
+
+    <!-- JavaScript 互動邏輯 -->
+    <script>
+        // 手機版選單切換
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Portfolio 分類篩選
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 移除所有 active 樣式
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-charcoal', 'text-white');
+                    b.classList.add('bg-white', 'text-charcoal');
+                });
+                // 設定當前 active
+                btn.classList.add('active', 'bg-charcoal', 'text-white');
+                btn.classList.remove('bg-white', 'text-charcoal');
+
+                const filter = btn.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.classList.contains(filter)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Modal 彈窗操作
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        // 表單提交處理
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('contact-form');
+            const successMsg = document.getElementById('success-message');
+            
+            form.classList.add('hidden');
+            successMsg.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
